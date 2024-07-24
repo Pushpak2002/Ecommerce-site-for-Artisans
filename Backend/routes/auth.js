@@ -1,8 +1,9 @@
 const express = require('express');
 const { body,validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-
+const JWT_SECRET = 'EccomerceSiteForArtisans';
 
 // const mongoose = require('mongoose');
 const router = express.Router();
@@ -23,14 +24,14 @@ router.post('/', [
     }
 
     try{
-      let users_name = await User.findOne({UserName: req.body.UserName})
-    if(users_name)
+      let user = await User.findOne({UserName: req.body.UserName})
+    if(user)
     {
       return res.status(400).json({error:"Username Already Exist"});
     }
 
-    let users_mail = await User.findOne({Mail: req.body.Mail})
-    if(users_mail)
+     user = await User.findOne({Mail: req.body.Mail})
+    if(user)
     {
       return res.status(400).json({error:"Mail Already Exist"});
     }
@@ -44,12 +45,20 @@ router.post('/', [
 
 
     //New user add
-    User.create({
+    user = await User.create({
         Name: req.body.Name,
         UserName: req.body.UserName,
         Mail: req.body.Mail,
         Password: secPass
-    }).then(user=>res.json(user)).catch(err=>console.error(err));
+    })
+    const data = ({
+      user:{
+        id: user.id
+      }
+    })
+    const authToken = jwt.sign(data,JWT_SECRET);
+    console.log(authToken);
+    res.json(authToken);
     }
     catch(error){
       console.error(error.message)
