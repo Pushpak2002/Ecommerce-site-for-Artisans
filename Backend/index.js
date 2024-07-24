@@ -8,6 +8,8 @@ const app = express()
 const port = 3000
 
 
+app.use(express.json()) //this is only to use app.body() to show request body data
+
 //available routes
 app.use('/api/auth', require('./routes/auth'))
 

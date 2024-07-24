@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
-// const { Schema } = mongoose;
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-    name:{
+    Name:{
         type : String,
         required : true
     },
