@@ -14,11 +14,11 @@ app.use(express.json()) //this is only to use app.body() to show request body da
 app.use('/api/auth', require('./routes/auth'))
 
 
-app.get('/', (req, res) => {
+app.post('/', (req, res) => {
   res.send('Hello Pushpak!')
 })
 
-app.listen(port, () => {
+app.listen(port,() => {
   console.log(`Example app listening on port http://localhost:${port}`)
 })
 
