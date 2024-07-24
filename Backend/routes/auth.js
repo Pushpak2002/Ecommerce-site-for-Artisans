@@ -12,10 +12,24 @@ router.post('/', [
     body('UserName','Min Username length is 3').isLength({min: 3}),
     body('Mail','Enter a valid Email').isEmail(),
     body('Password','Min password length is 5').isLength({min: 5}),
-  ],(req,res) => {
+  ],async (req,res) => {
     const errors = validationResult(req);
+
     if (!errors.isEmpty()) {
       return res.status(404).json({errors: errors.array()});
+    }
+
+    try{
+      let users_name = await User.findOne({UserName: req.body.UserName})
+    if(users_name)
+    {
+      return res.status(400).json({error:"Username Already Exist"});
+    }
+
+    let users_mail = await User.findOne({Mail: req.body.Mail})
+    if(users_mail)
+    {
+      return res.status(400).json({error:"Mail Already Exist"});
     }
 
     User.create({
@@ -23,7 +37,10 @@ router.post('/', [
         UserName: req.body.UserName,
         Mail: req.body.Mail,
         Password: req.body.Password
-    }).then(user=>res.json(user));
+    }).then(user=>res.json(user)).catch(err=>console.error(err));
+    }catch{
+      console.error(error.message)
+    }
     
 })
 
