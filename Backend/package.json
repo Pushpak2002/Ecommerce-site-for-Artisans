@@ -1,0 +1,14 @@
+{
+  "name": "site-backend",
+  "version": "1.0.0",
+  "description": "using inotebook-use cloud",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
