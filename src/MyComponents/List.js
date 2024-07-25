@@ -15,6 +15,8 @@ export const List = () => {
     .then(users => setUsers(users.data))
     .catch(err=>console.log(err))
   },[])
+
+  
   return (
     <>
       <NavBar/>
@@ -35,7 +37,7 @@ export const List = () => {
                     gmail
                   </th>
                   <th>
-                    password
+                    ID
                   </th>
                 </tr>
                 </thead>
@@ -53,7 +55,7 @@ export const List = () => {
                         {user.Mail}
                       </td>
                       <td>
-                        {user.Passowrd}
+                        {user._id}
                       </td>
                     </tr>
                   })}

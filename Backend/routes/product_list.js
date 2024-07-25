@@ -42,7 +42,7 @@ router.post('/addproduct', [
 
 //ROUTE: 2 Login user ...(login not required)
 router.post('/productlist', [
-    body('ProdCat', 'Product Category is required').notEmpty()
+    body('UserName', 'Product Category is required').notEmpty()
   ],fetchProduct, async (req,res) => {
   
       const errors = validationResult(req); 
@@ -53,6 +53,30 @@ router.post('/productlist', [
       return res.json(req.product);
   })
 
+
+
+  //ROUTE: 3 get product using username users (login not requires)  temp
+router.get('/tempproductlist',async (req,res) => 
+  { 
+   const { UserName } = req.query; // Access query parameter
+ 
+   if (!UserName) {
+     return res.status(400).json({ msg: 'Username is required' });
+   }
+ 
+   try {
+     const user = await Product.find({ UserName: UserName.toLowerCase()  });
+ 
+     if (!user) {
+       return res.status(404).json({ msg: 'User not found' });
+     }
+ 
+     res.json(user);
+   } catch (error) {
+     console.error(error.message);
+     res.status(500).send('Server Error');
+   }
+ })
 
 
 

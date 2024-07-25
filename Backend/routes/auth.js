@@ -3,7 +3,6 @@ const { body,validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchuser = require('../Middelware/fetchuser');
-
 const JWT_SECRET = 'EccomerceSiteForArtisans';
 
 // const mongoose = require('mongoose');
@@ -114,7 +113,7 @@ router.post('/login', [
 //ROUTE: 3 get logged in user details (login required)
 router.post('/getuser',fetchuser,async (req,res) => {
 try {
-   userID = req.user.id;
+  userID = req.user.id;
   const user = await User.findById(userID).select("-Password")
   res.json(user); 
 
@@ -125,7 +124,31 @@ try {
 })
 
 
-//ROUTE: 4 get all users (login not requires)
+
+//ROUTE: 4 get user using username users (login not requires)  temp
+router.get('/getspecificuser',async (req,res) => 
+ { 
+  const { UserName } = req.query; // Access query parameter
+
+  if (!UserName) {
+    return res.status(400).json({ msg: 'Username is required' });
+  }
+
+  try {
+    const user = await User.findOne({ UserName:UserName.toLowerCase()  });
+
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+})
+
+//ROUTE: 5 get all users (login not requires)
 router.get('/getalluser',async (req,res) => {
   try {
     

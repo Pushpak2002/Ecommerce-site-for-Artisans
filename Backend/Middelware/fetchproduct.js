@@ -2,10 +2,10 @@ const products = require('../Models/Product');
 
 
 async function fetchProduct(req, res, next) {
-    const { ProdCat } = req.body;
+    const { UserName } = req.body;
   
     try {
-      const product = await products.find({ ProdCat: ProdCat });
+      const product = await products.find({ UserName: UserName});
   
       if (!product) {
         return res.status(404).json({ error: "Product not found" });
