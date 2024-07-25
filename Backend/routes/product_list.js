@@ -42,13 +42,15 @@ router.post('/addproduct', [
 
 //ROUTE: 2 Login user ...(login not required)
 router.post('/productlist', [
-    body('ProductCat', 'Product Category is required').notEmpty()
+    body('ProdCat', 'Product Category is required').notEmpty()
   ],fetchProduct, async (req,res) => {
   
-      const errors = validationResult(req);
+      const errors = validationResult(req); 
       if (!errors.isEmpty()) {
         return res.status(404).json({errors: errors.array()});
       }
+
+      return res.json(req.product);
   })
 
 

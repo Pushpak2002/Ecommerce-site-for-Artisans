@@ -9,7 +9,6 @@ const ProductSchema = new Schema({
     ProdCat :{
     type: String,
     required: true,
-    unique: true
     },
     UserName:{
         type : String,
