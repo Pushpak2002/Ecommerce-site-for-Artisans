@@ -16,7 +16,7 @@ export const NavBar = (props) => {
         </li>
       </ul>
     </div>
-    <div classNameName='ml-5'>
+    <div className='ml-5'>
       <span className="material-symbols-outlined" style={{marginRight:'10px'}}>favorite</span>
       <span className="material-symbols-outlined" style={{marginRight:'10px'}}>Shopping_Cart</span>
       <span className="material-symbols-outlined" style={{marginRight:'10px'}}  >Person</span>

@@ -2,6 +2,7 @@ const express = require('express');
 const { body,validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const fetchuser = require('../Middelware/fetchuser');
 
 const JWT_SECRET = 'EccomerceSiteForArtisans';
 
@@ -10,7 +11,7 @@ const router = express.Router();
 const User = require('../Models/User');
 const { default: mongoose } = require('mongoose');
 
-//Create a new user no login required
+//ROUTE: 1 Create a new user no login required
 router.post('/Signup', [
     body('Name','Min name length is 3').isLength({min: 3}),
     body('UserName','Min Username length is 3').isLength({min: 3}),
@@ -67,9 +68,8 @@ router.post('/Signup', [
     
 })
 
-//Login user ...
 
-
+//ROUTE: 2 Login user ...(login not required)
 router.post('/login', [
   body('UserName','Username can not be black').exists(),
   body('Password','Password can not be blank').exists(),
@@ -102,7 +102,7 @@ router.post('/login', [
         }
       })
       const authToken = jwt.sign(data,JWT_SECRET);
-      res.json(authToken);
+      res.json({authToken});
     }
     catch(error){
       console.error(error.message);
@@ -110,6 +110,33 @@ router.post('/login', [
     }
 })
 
+
+//ROUTE: 3 get logged in user details (login required)
+router.post('/getuser',fetchuser,async (req,res) => {
+try {
+   userID = req.user.id;
+  const user = await User.findById(userID).select("-Password")
+  res.json(user); 
+
+} catch (error) {
+  console.error(error.message);
+      res.status(500).send("Interal Error Occured");
+}
+})
+
+
+//ROUTE: 4 get all users (login not requires)
+router.get('/getalluser',async (req,res) => {
+  try {
+    
+    const user = await User.find({})
+    res.json(user); 
+  
+  } catch (error) {
+    console.error(error.message);
+        res.status(500).send("Interal Error Occured");
+  }
+  })
 
 
 module.exports = router

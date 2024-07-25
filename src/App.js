@@ -1,13 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
 import { Home_page } from './MyComponents/Home_page';
-import { demo } from './MyComponents/demo';
+import { List } from './MyComponents/List';
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 
 function App() {
   return (
     <>
-      <Home_page/>
-      {/* {demo} */}
+      <Router>
+      <Routes>
+        <Route path="/" element={<Home_page />} />
+        <Route path="/product/:id" element={<List />} />
+      </Routes>
+    </Router>
     </>
     
   );
