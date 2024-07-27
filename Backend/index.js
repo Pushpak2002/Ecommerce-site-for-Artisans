@@ -13,6 +13,8 @@ app.use(express.json()) //this is only to use app.body() to show request body da
 //available routes
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/product', require('./routes/product_list'))
+app.use('/api/cart', require('./routes/cartProduct'))
+
 
 
 app.post('/', (req, res) => {

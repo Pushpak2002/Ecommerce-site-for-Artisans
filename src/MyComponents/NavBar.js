@@ -8,13 +8,18 @@ export const NavBar = (props) => {
 
   const handleProfile = () => {
     
-    navigate('/profile?UserName=Admin'); // Adjust the route based on your routing setup
+    navigate('/Profile?UserName=Admin'); // Adjust the route based on your routing setup
+  };
+
+  const handleCart = () => {
+    
+    navigate('/Cart?UserName=Admin'); // Adjust the route based on your routing setup
   };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
   <div className="container-fluid">
-    <a className="navbar-brand" href="#">{props.title}</a>
+    <a className="navbar-brand" href="/">{props.title}</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" 
       data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
       aria-expanded="false" aria-label="Toggle navigation">
@@ -23,13 +28,13 @@ export const NavBar = (props) => {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">Home</a>
+          <a className="nav-link active" aria-current="page" href="/">Home</a>
         </li>
       </ul>
     </div>
-    <div className='ml-5'>
-      <span className="material-symbols-outlined" style={{marginRight:'10px'}}>favorite</span>
-      <span className="material-symbols-outlined" style={{marginRight:'10px'}}>Shopping_Cart</span>
+    <div className=' ml-5'>
+      <span className="material-symbols-outlined" style={{marginRight:'10px'}} onClick={() => alert("This page is under working")}>favorite</span>
+      <span className="material-symbols-outlined" style={{marginRight:'10px'}} onClick={handleCart}>Shopping_Cart</span>
       <span className="material-symbols-outlined" style={{marginRight:'10px'}} onClick={handleProfile} >Person</span>
     </div>
   </div>
