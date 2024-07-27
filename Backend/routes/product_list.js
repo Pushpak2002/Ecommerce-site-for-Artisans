@@ -105,6 +105,31 @@ router.get('/tempproductlistbyId',async (req,res) =>
  })
 
 
+   //ROUTE: 5 get product using prodcat users (login not requires)  temp
+router.get('/tempproductlistcat',async (req,res) =>
+  { 
+   const { ProdCat } = req.query; // Access query parameter
+ 
+   if (!ProdCat) {
+     return res.status(400).json({ msg: 'ProdCat is required' });
+   }
+ 
+   try {
+     const prod = await Product.find({ ProdCat: ProdCat.toLowerCase()  });
+    //  const prod = await Product.find({});
+
+     if (!prod) {
+       return res.status(404).json({ msg: 'Product not found' });
+     }
+ 
+     res.json(prod);
+   } catch (error) {
+     console.error(error.message);
+     res.status(500).send('Server Error');
+   }
+ })
+
+
 
 
 

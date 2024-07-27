@@ -1,5 +1,7 @@
 import React from 'react'
-import {List} from './List'
+// import {List} from './List'
+
+import {Product_List} from './Product_List'
 import {NavBar} from './NavBar'
 import './CSS/Homee.css'
 import { useNavigate } from 'react-router-dom';
@@ -9,8 +11,10 @@ export const Home_page = () => {
 
   const navigate = useNavigate();
 
-  const handleImageClick = (id) => {
-    navigate(`./List/${id}`);
+  const handleImageClick = (ProdCat) => {
+    console.log("on homepage");
+    console.log(ProdCat)
+    navigate(`./Product_List/`,{ state: { ProdCat } });
   };
 
   return (

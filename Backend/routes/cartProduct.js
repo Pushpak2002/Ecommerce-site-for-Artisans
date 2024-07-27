@@ -14,14 +14,16 @@ router.get('/tempaddproduct',async (req,res) => {
       if (!errors.isEmpty()) {
         return res.status(404).json({errors: errors.array()});
       }
-  
+
+      const { UserName, ProdId } = req.query;
       try{
-        Cart.create({
+        const newCart = await Cart.create({
             
-            UserName: req.body.UserName,
-            ProdId: req.body.ProdId
+            UserName,
+            ProdId
            
-        }).then(Cart=>res.json(Cart)).catch(err=>console.error(err));
+        });
+        res.json(newCart)
       }
       catch(error){
         console.error(error.message);

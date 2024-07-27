@@ -21,7 +21,7 @@ export const List = () => {
     <>
       <NavBar/>
       <div>
-            into {id}
+            into List {id}
             <div className="w-100 vh-100 d-flex justify-content-center align-items-center">
               <div className='w-50'>
               <table className="table">

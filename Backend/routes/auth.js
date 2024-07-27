@@ -157,7 +157,7 @@ router.get('/getalluser',async (req,res) => {
   
   } catch (error) {
     console.error(error.message);
-        res.status(500).send("Interal Error Occured");
+        res.status(500).send("product error Occured");
   }
   })
 

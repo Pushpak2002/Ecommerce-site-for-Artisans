@@ -1,0 +1,354 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+* {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  max-width: 100%;
+  background-color: rgb(242, 224, 226);
+}
+
+.container1 {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
+  font-size: 17px;
+}
+
+header .navbar a {
+  color: black;
+  padding: 0 1.5rem;
+  text-decoration: none;
+}
+
+header .navbar a:hover {
+  color: rgb(176, 7, 58);
+}
+
+a.logo1 {
+  font-size: 30px;
+  font-weight: bolder;
+  color: #333;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.icons {
+  display: flex;
+  gap: 10px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 200, 'opsz' 48;
+}
+
+.material-symbols-outlined:hover {
+  color: rgba(246, 9, 48, 0.941);
+}
+
+/* Main Content */
+.mid {
+  display: flex;
+  justify-content: center;
+  padding: 100px 20px 50px;
+  gap: 150px;
+}
+
+.left {
+  padding-top: 30px;
+  list-style-type: none;
+  max-width: 70%;
+}
+
+.right {
+  margin: 0;
+  padding-left: 0;
+}
+
+/* Latest Products Section */
+.latest_products {
+  background-color: rgb(241, 211, 214);
+  text-align: center;
+  max-width: 1480px;
+  margin: 0 auto 20px;
+  padding: 15px;
+}
+
+/* Product List */
+.products {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap */
+  justify-content: center;
+  gap: 20px; /* Adjusted gap */
+  padding: 30px 20px;
+}
+
+.product1, .product2, .product3 {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.product1, .product2, .product3 {
+  flex: 1 0 250px; /* Responsive item width */
+  max-width: 250px; /* Maximum width */
+}
+
+img.prd {
+  width: 100%;
+  height: auto;
+  outline: 2px solid black;
+}
+
+img.prd:hover {
+  box-shadow: 6px 6px 6px 6px grey;
+  transition: 0.3s ease;
+}
+
+.text {
+  font-size: 20px;
+}
+
+a {
+  list-style-type: none;
+  text-decoration: none;
+  text-align: center;
+  color: rgb(24, 24, 44);
+}
+
+a:hover {
+  color: rgb(23, 23, 135);
+}
+
+.checked {
+  color: orange;
+}
+
+/* Customer Reviews */
+.customer_review {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap */
+  gap: 20px;
+  padding: 10px 20px;
+}
+
+.review {
+  list-style-type: none;
+  background-color: rgb(248, 229, 233);
+  padding: 15px;
+  transition: 0.5s ease;
+}
+
+.review:hover {
+  background-color: aliceblue;
+  box-shadow: 4px 4px 4px 4px grey;
+}
+
+/* Item List */
+.item {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-evenly;
+  font-size: 15px;
+  gap: 20px; /* Adjusted gap */
+  background-color: rgb(179, 179, 183);
+  padding: 20px 10px;
+}
+
+.item_list {
+  padding-top: 10px;
+}
+
+/* Footer */
+footer {
+  background-color: rgb(7, 7, 47);
+}
+
+.list {
+  display: flex;
+  list-style-type: none;
+  text-decoration: none;
+  justify-content: center;
+  gap: 30px;
+  font-size: 12px;
+  padding: 15px 0;
+}
+
+.ft {
+  list-style-type: none;
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.ft:hover {
+  color: rgb(118, 120, 120);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .left {
+    padding-top: 0;
+    font-size: 15px;
+  }
+
+  .right_img {
+    height: 200px;
+    width: 200px;
+  }
+
+  .mid {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .products {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .product1, .product2, .product3 {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  ul.l {
+    padding: 0;
+  }
+
+  .item {
+    padding-left: 20px;
+    gap: 10px;
+  }
+
+  .customer_review {
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .container1 {
+    max-width: 1024px;
+  }
+
+  .products {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .product1, .product2, .product3 {
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  ul.l {
+    padding: 0;
+  }
+
+  .left {
+    padding-top: 0;
+    font-size: 15px;
+  }
+
+  .customer_review {
+    display: flex;
+    justify-content: space-evenly;
+    padding-right: 17px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  /* Additional styles for very small screens if needed */
+}
+/* CSS for buttons */
+.button-container {
+    margin-left: 50px;
+    display: flex;
+    gap: 10px; /* Adjusts space between buttons */
+    margin-top: 10px; /* Adds space above the buttons */
+  }
+  
+  .btn-custom {
+    padding: 8px 16px; /* Reduces padding to make the button smaller */
+    font-size: 14px; /* Reduces font size */
+    border-radius: 4px; /* Adds slight rounding to the corners */
+    box-shadow: none; /* Removes default shadow */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+  }
+  
+  .btn-custom:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow on hover */
+  }
+  
+  /* Customize specific button classes */
+  .btn-danger-custom {
+    background-color: #dc3545; /* Red color for danger button */
+    border: 1px solid #dc3545;
+    color: #fff;
+  }
+  
+  .btn-danger-custom:hover {
+    background-color: #c82333; /* Darker red on hover */
+    border-color: #bd2130;
+  }
+  
+  .btn-primary-custom {
+    background-color: #007bff; /* Blue color for primary button */
+    border: 1px solid #007bff;
+    color: #fff;
+  }
+  
+  .btn-primary-custom:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    border-color: #004085;
+  }
+  /* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+  }
+  
+  .modal-content img {
+    display:block;
+    margin: 0 auto;
+    width: 200px;
+    /* height: 200px; */
+  }
+  
+  .modal-content button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
