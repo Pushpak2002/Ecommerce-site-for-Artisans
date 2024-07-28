@@ -8,11 +8,7 @@ const Signin = () => {
   const navigate = useNavigate();
 
     const [isSignUp, setIsSignUp] = useState(false);
-    const [formData, setFormData] = useState({
-      // name: '',
-      // userName: '',
-      // Mail: '',
-      // Password: ''
+    const [formData, setFormData] = useState({  
     });
   
     const handleInputChange = (e) => {
@@ -22,26 +18,27 @@ const Signin = () => {
         [name]: value
       });
     };
-    console.log("data is here")
-    console.log(formData)
+    // console.log("data is here")
+    // console.log(formData)
   
     const handleSignUp = async (e) => {
       e.preventDefault();
       // You can add form validation here before making the API call
-  
+      console.log("formData",formData)
       try {
         const response = await fetch('http://localhost:5000/api/auth/Signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(formData)
-        });
-  
+          body: JSON.stringify({Name:formData.name, UserName: formData.UserName, Mail: formData.email, Password: formData.password })
+        }); 
+        console.log(formData.name)
         if (response.ok) {
           const data = await response.json();
           // Handle successful signup (e.g., redirect, show message)
           console.log('Sign up successful:', data);
+          navigate('/Profile');
         } else {
           // Handle errors
           console.error('Sign up failed:', response.statusText);
@@ -62,8 +59,8 @@ const Signin = () => {
             },
             body: JSON.stringify({ UserName: formData.UserName, Password: formData.Password }), // Ensure correct field names
           });
-          console.log("response")
-          console.log(response)
+          // console.log("response")
+          // console.log(response)
           if (!response.ok) {
             const error = await response.json();
             throw new Error(error.message || 'Login failed');
@@ -98,7 +95,7 @@ const Signin = () => {
 
   return (
     <>
-    <NavBar/>
+    <NavBar title="HandCraft" />
     <div className={styles.container}>
       {!isSignUp ? (
         <div className={styles.formContainer}>
@@ -114,7 +111,7 @@ const Signin = () => {
             <input
               type="text"
               name="UserName"
-              placeholder="UserNName"
+              placeholder="UserName"
               value={formData.UserName}
               onChange={handleInputChange}
             />
@@ -143,7 +140,7 @@ const Signin = () => {
               <a href="#" className={styles.icon}><i className="fab fa-github"></i></a>
               <a href="#" className={styles.icon}><i className="fab fa-linkedin-in"></i></a>
             </div>
-            <span>or use your email for registration</span>
+            
             <input
               type="text"
               name="name"

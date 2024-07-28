@@ -84,7 +84,7 @@ const Profile = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar title="HandCraft" />
       <div className={styles.profileContainer}>
         <div className={styles.profileHeader}>
           <img

@@ -1,19 +1,34 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./CSS/cart.module.css";
+import {jwtDecode} from 'jwt-decode'; // Correct import statement for jwt-decode
+import { useNavigate } from 'react-router-dom';
+import {NavBar} from './NavBar'
 
 export const Cart = () => {
+  const navigate = useNavigate();
+
   const [cart, setCart] = useState([]);
   const [productDetails, setProductDetails] = useState([]);
   const UserName = "Admin";
 
   useEffect(() => {
+    
     const fetchCartData = async () => {
+      console.log("i am here")
+      const token = localStorage.getItem("authToken");
+      if(token)
+        {
+      const decoded = jwtDecode(token); //decoded.user.id
+      const id = decoded.user.id;
+      console.log("id = ",id)
+    
+
       try {
         const cartResponse = await axios.get(
           "http://localhost:5000/api/cart/tempCartList",
           {
-            params: { UserName },
+            params: {UserName:id},
           }
         );
         setCart(cartResponse.data);
@@ -45,7 +60,11 @@ export const Cart = () => {
       } catch (err) {
         console.error("Error fetching data:", err);
       }
-    };
+    }
+    else{
+      navigate('/signin');
+    }
+  };
 
     fetchCartData();
   }, [UserName]);
@@ -89,6 +108,7 @@ export const Cart = () => {
 
   return (
     <>
+    <NavBar title="HandCraft" />
       <div className={styles.productList}>
         <header className={styles.cartHeader}>
           <h1 className={styles.cartTitle}>Your Shopping Cart</h1>

@@ -36,7 +36,6 @@ router.get('/tempaddproduct',async (req,res) => {
   router.get('/tempCartList',async (req,res) => 
     { 
      const { UserName } = req.query; // Access query parameter
-   
      if (!UserName) {
        return res.status(400).json({ msg: 'Username is required' });
      }

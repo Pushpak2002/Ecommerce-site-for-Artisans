@@ -19,7 +19,7 @@ export const List = () => {
   
   return (
     <>
-      <NavBar/>
+     <NavBar title="HandCraft" />
       <div>
             into List {id}
             <div className="w-100 vh-100 d-flex justify-content-center align-items-center">

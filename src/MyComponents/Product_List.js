@@ -60,6 +60,7 @@ export const Product_List = () => {
         params: { UserName, ProdId },
       })
       .then((response) => {
+        alert("Product added to cart")
         console.log("Product added to cart:", response.data);
         // Handle successful addition, e.g., show a message or update state
       })

@@ -19,53 +19,53 @@ const validateSignup = [
   body('Password', 'Password must be at least 5 characters long').isLength({ min: 5 })
 ];
 
-router.post('/Signup', validateSignup, async (req, res) => {
-  // Validate request body
+router.post('/Signup', async (req,res) => {
+  console.log("I am here")
+  //If there are errors, return bad request
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() }); // Use 400 for validation errors
+    return res.status(404).json({errors: errors.array()});
+  }
+  const {Name,UserName,Mail,Password } = req.body;
+  try{
+    let user = await User.findOne({UserName: req.body.UserName})
+  if(user)
+  {
+    return res.status(400).json({error:"Username Already Exist"});
   }
 
-  try {
-    // Check if the username already exists
-    let user = await User.findOne({ UserName: req.body.UserName });
-    if (user) {
-      return res.status(400).json({ error: "Username already exists" });
+  user = await User.findOne({Mail: req.body.Mail})
+  if(user)
+  {
+    return res.status(400).json({error:"Mail Already Exist"});
+  }
+
+  //creating password hashing
+  const salt = await bcrypt.genSalt(10);
+  const secPass = await bcrypt.hash(req.body.Password, salt);
+  console.log("secPass = ", secPass)
+  console.log("I am here")
+  //New user add
+  user = await User.create({
+      Name: Name,
+      UserName: UserName,
+      Mail: Mail,
+      Password: secPass
+  })
+  const data = ({
+    user:{
+      id: user.id
     }
-
-    // Check if the email already exists
-    user = await User.findOne({ Mail: req.body.Mail });
-    if (user) {
-      return res.status(400).json({ error: "Email already exists" });
-    }
-
-    // Hash the password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.Password, salt);
-
-    // Create a new user
-    user = await User.create({
-      Name: req.body.Name,
-      UserName: req.body.UserName,
-      Mail: req.body.Mail,
-      Password: hashedPassword
-    });
-
-    // Generate a JWT token
-    const payload = {
-      user: {
-        id: user.id
-      }
-    };
-    const authToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
-
-    // Respond with the token
-    res.json({ token: authToken });
-  } catch (error) {
+  })
+  const authToken = jwt.sign(data,JWT_SECRET);
+  res.json(authToken);
+  }
+  catch(error){
     console.error(error.message);
-    res.status(500).send("Server error");
+    res.status(500).send("Some Error Occured");
   }
+  
 })
 
 //ROUTE: 2 Login user ...(login not required)
