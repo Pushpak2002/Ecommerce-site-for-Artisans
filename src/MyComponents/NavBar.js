@@ -1,15 +1,40 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
+
 
 
 export const NavBar = (props) => {
-
   const navigate = useNavigate();
 
   const handleProfile = () => {
+
+    const token = localStorage.getItem("authToken");
+    console.log("token", token)
+    // console.log(typeof token)
+    if (!token) {
+      
+      // No token found, redirect to login
+      navigate(`/signin/`);
+      return;
+    }
     
-    navigate('/Profile?UserName=Admin'); // Adjust the route based on your routing setup
+    try {
+      console.log("into try")
+      const decoded = jwtDecode(token); 
+      // console.log("decoded = ", decoded.user.id)
+      if (decoded && decoded.user && decoded.user.id){
+        // console.log(decoded.user.UserName)
+        navigate('/Profile');
+      }else{
+        navigate('/signin');
+      }
+    } catch (error) {
+      navigate('/signin');
+    }
+// Adjust the route based on your routing setup
   };
+
 
   const handleCart = () => {
     

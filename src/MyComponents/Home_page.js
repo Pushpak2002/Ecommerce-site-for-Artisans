@@ -1,7 +1,6 @@
 import React from 'react'
 // import {List} from './List'
 
-import {Product_List} from './Product_List'
 import {NavBar} from './NavBar'
 import './CSS/Homee.css'
 import { useNavigate } from 'react-router-dom';

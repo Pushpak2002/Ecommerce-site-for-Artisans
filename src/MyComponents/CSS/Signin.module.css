@@ -1,0 +1,76 @@
+/* src/MyComponents/CSS/Login.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+.container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 400px;
+}
+
+.form {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  padding: 20px;
+  width: 100%;
+}
+
+.form h1 {
+  margin-bottom: 20px;
+}
+
+.form input {
+  background-color: #eee;
+  border: none;
+  margin: 8px 0;
+  padding: 10px 15px;
+  font-size: 13px;
+  border-radius: 8px;
+  width: 100%;
+  outline: none;
+}
+
+.form button {
+  background-color: #e605d3;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+
+
+.signUpPrompt, .signInPrompt {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.signUpPrompt span, .signInPrompt span {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.signUpPrompt button, .signInPrompt button {
+  background: none;
+  padding-left: 10px;
+  border: none;
+  color: #e605d3;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}

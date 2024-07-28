@@ -65,7 +65,7 @@ router.get('/tempproductlist',async (req,res) =>
    }
  
    try {
-     const user = await Product.find({ UserName: UserName.toLowerCase()  });
+     const user = await Product.find({ UserName: UserName});
  
      if (!user) {
        return res.status(404).json({ msg: 'User not found' });
@@ -115,13 +115,13 @@ router.get('/tempproductlistcat',async (req,res) =>
    }
  
    try {
-     const prod = await Product.find({ ProdCat: ProdCat.toLowerCase()  });
+     const prod = await Product.find({ ProdCat });
     //  const prod = await Product.find({});
 
      if (!prod) {
        return res.status(404).json({ msg: 'Product not found' });
      }
- 
+     
      res.json(prod);
    } catch (error) {
      console.error(error.message);
