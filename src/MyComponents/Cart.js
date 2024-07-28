@@ -28,7 +28,7 @@ export const Cart = () => {
         const cartResponse = await axios.get(
           "http://localhost:5000/api/cart/tempCartList",
           {
-            params: {UserName:id},
+            params: {UserId:id},
           }
         );
         setCart(cartResponse.data);

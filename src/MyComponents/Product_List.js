@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavBar } from "./NavBar";
 import { useLocation } from "react-router-dom";
-
+import {jwtDecode} from 'jwt-decode'; 
 import "./CSS/Product_List.css";
 import axios from "axios";
 
@@ -54,10 +54,13 @@ export const Product_List = () => {
       .catch((err) => console.log(err));
   }, []); // Dependency array includes UserName
 
-  const addToCart = (UserName, ProdId) => {
+  const addToCart = (ProdId) => {
+    const token = localStorage.getItem("authToken");
+    const decoded = jwtDecode(token);
+    const UserId = decoded.user.id;
     axios
       .get("http://localhost:5000/api/cart/tempaddproduct", {
-        params: { UserName, ProdId },
+        params: {UserId, ProdId }
       })
       .then((response) => {
         alert("Product added to cart")
@@ -137,7 +140,7 @@ export const Product_List = () => {
                       </button>
                       <button
                         className="btn btn-primary btn-custom btn-primary-custom"
-                        onClick={() => addToCart("current_user", product._id)} // Pass UserName and ProdId correctly
+                        onClick={() => addToCart(product._id)} // Pass UserName and ProdId correctly
                       >
                         Add to Cart
                       </button>

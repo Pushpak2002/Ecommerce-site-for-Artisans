@@ -6,11 +6,6 @@ const fetchProduct = require('../Middelware/fetchproduct');
 const Product = require('../Models/Product');
 
 
-
-
-const Products = require('../Models/Product');
-
-
 //ROUTE:1 Add Product
 
 router.post('/addproduct', [

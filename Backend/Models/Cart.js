@@ -7,11 +7,10 @@ const CartSchema = new Schema({
         required : true
     },
     
-    UserName:{
-        type : String,
+    UserId:{
+        type:String,
         required : true,
-    },
-
+    }
     
 });
 
