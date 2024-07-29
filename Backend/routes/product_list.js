@@ -8,17 +8,19 @@ const Product = require('../Models/Product');
 
 //ROUTE:1 Add Product
 
-router.post('/addproduct', [
-    body('ProdName','Username can not be black').exists(),
-    body('Price','Password can not be blank').exists(),
-  ],async (req,res) => {
+router.post('/addproduct',[
+  body('UserName', 'Username cannot be blank').exists(),
+  body('ProdCat', 'ProdCat cannot be blank').exists()
+],async (req,res) => {
   
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(404).json({errors: errors.array()});
       }
-  
+      const {ProdName,ProdCat,UserName,Price,Description} = req.body;
       try{
+        console.log("In router = ", ProdName,ProdCat, UserName,Price,Description)
+
         Product.create({
             ProdName: req.body.ProdName,
             ProdCat: req.body.ProdCat,
@@ -29,7 +31,7 @@ router.post('/addproduct', [
       }
       catch(error){
         console.error(error.message);
-        res.status(500).send("Product error");
+        res.status(500).send("Product Adding error");
       }
   })
 

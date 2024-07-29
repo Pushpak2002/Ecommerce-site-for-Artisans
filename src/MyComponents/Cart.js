@@ -111,11 +111,9 @@ export const Cart = () => {
     <NavBar title="HandCraft" />
       <div className={styles.productList}>
         <header className={styles.cartHeader}>
-          <h1 className={styles.cartTitle}>Your Shopping Cart</h1>
+          <h3 className={styles.cartTitle}>Your Shopping Cart</h3>
           <p className={styles.cartDescription}>
-            Welcome to your shopping cart! Here you can review the items you
-            have selected, update quantities, or remove items before proceeding
-            to checkout.
+            Welcome to your shopping cart!
           </p>
           <div className={styles.cartSummary}>
             <span className={styles.cartIcon}>🛒</span>

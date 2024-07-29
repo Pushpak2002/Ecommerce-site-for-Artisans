@@ -56,7 +56,7 @@ export const Home_page = () => {
                   style={{ height: '280px', width: '250px' }}
                   src="/Images/Home/pot.jpg"
                   alt="Flower Pot"
-                  onClick={() => handleImageClick('pot')}
+                  onClick={() => handleImageClick('Flower_pot')}
                 />
               </li>
               <li><h4>Flower Pot</h4></li>
