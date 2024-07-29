@@ -127,6 +127,28 @@ router.get('/tempproductlistcat',async (req,res) =>
  })
 
 
+// ROUTE: 6 delete product
+router.delete('/deleteproduct', async (req, res) => {
+  const { _id } = req.query; // Access query parameter
+
+  if (!_id) {
+    return res.status(400).json({ msg: 'Product ID is required' });
+  }
+
+  try {
+    const prod = await Product.findByIdAndDelete(_id);
+    if (!prod) {
+      return res.status(404).json({ msg: 'Product not found' });
+    }
+    res.status(200).send("Product deleted successfully");
+  } catch (error) {
+    console.error("Error deleting product:", error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+
 
 
 

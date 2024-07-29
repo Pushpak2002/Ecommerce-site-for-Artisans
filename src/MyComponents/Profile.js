@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+
 import styles from "./CSS/profile.module.css";
 import { NavBar } from "./NavBar";
 
@@ -8,15 +9,15 @@ const Profile = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("authToken");
 
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState([]);
   const [product, setProduct] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showAddProductPopup, setShowAddProductPopup] = useState(false);
   const [newProduct, setNewProduct] = useState({
-    ProdName: "",
-    ProdCat: "",
-    Price: "",  // Default value as an empty string
-    Description: ""
+    ProdName: '',
+    ProdCat: '',
+    Price: '',  // Default value as an empty string
+    Description: ''
   });
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/auth/getuser",
+          `http://localhost:5000/api/auth/getuser`,
           {},
           {
             headers: {
@@ -54,14 +55,14 @@ const Profile = () => {
     };
 
     fetchUserData();
-  }, [token, navigate]);
+  }, [token]);
 
   useEffect(() => {
     if (isLoggedIn) {
       const fetchProdData = async () => {
         try {
           const responses = await axios.get(
-            "http://localhost:5000/api/product/tempproductlist",
+            `http://localhost:5000/api/product/tempproductlist`,
             {
               params: { UserName: user.UserName },
             }
@@ -100,31 +101,51 @@ const Profile = () => {
     try {
       const UserName = user.UserName;
       const response = await axios.post(
-        "http://localhost:5000/api/product/addproduct",
+        `http://localhost:5000/api/product/addproduct`,
         {
           ProdName: newProduct.ProdName,
           ProdCat: newProduct.ProdCat,
           UserName: UserName,
           Price: newProduct.Price,
-          Description: newProduct.Description,
+          Description: newProduct.Description
         },
         {
           headers: {
             "Content-Type": "application/json",
             "auth-token": token,
-          },
+          }
         }
       );
 
       if (response.data) {
-        alert("Product added")
-        setProduct((prevProducts) => [...prevProducts, response.data]);
+        setProduct((newProducts) => [...newProducts, response.data]);
         setShowAddProductPopup(false);
       }
     } catch (err) {
       console.error("Error adding product:", err);
     }
   };
+
+  const handleDeleteProduct = async (productId) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/product/deleteproduct`, {
+        params: {
+          _id: productId,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": token,
+        }
+      });
+  
+      setProduct((products) => products.filter((prod) => prod._id !== productId));
+    } catch (err) {
+      console.error("Error deleting product:", err);
+    }
+  
+    console.log("ProductId", productId);
+  };
+  
 
   return (
     <>
@@ -143,11 +164,9 @@ const Profile = () => {
           <h2 className={styles.sectionTitle}>About</h2>
           <p className={styles.userBio}>{"No bio available"}</p>
         </div>
-        {/* Add Product Button */}
         <button className={styles.addButton} onClick={handleAddProductClick}>
           Add Product
         </button>
-        {/* Add Product Popup */}
         {showAddProductPopup && (
           <div className={styles.popup}>
             <div className={styles.popupContent}>
@@ -174,7 +193,7 @@ const Profile = () => {
                     <option value="">Select Category</option>
                     <option value="Flower_pot">Flower pot</option>
                     <option value="painting">Painting</option>
-                    <option value="wood">Wood art</option>
+                    <option value="wood">wood art</option>
                     <option value="wool">Wool</option>
                     <option value="jewellery">Jewellery</option>
                   </select>
@@ -194,7 +213,7 @@ const Profile = () => {
                   <input
                     type="number"
                     name="Price"
-                    value={newProduct.Price}
+                    value={String(newProduct.Price)}
                     onChange={handleInputChange}
                     required
                   />
@@ -207,7 +226,6 @@ const Profile = () => {
             </div>
           </div>
         )}
-        {/* Product List */}
         <div className={styles.productList}>
           <h2 className={styles.sectionTitle}>Uploaded Products</h2>
           {product && product.length > 0 ? (
@@ -222,6 +240,12 @@ const Profile = () => {
                   <div className={styles.productDetails}>
                     <h3 className={styles.productName}>{prod.ProdName}</h3>
                     <p className={styles.productPrice}>${prod.Price}</p>
+                    <button
+                      className={styles.deleteButton}
+                      onClick={() => handleDeleteProduct(prod._id)}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </li>
               ))}
